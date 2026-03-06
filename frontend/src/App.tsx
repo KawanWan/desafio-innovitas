@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Characters from './pages/Characters';
 import CharacterDetails from './pages/CharacterDetails';
 import './App.css';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             
             <Route path="/my-characters" element={<div>Meus Personagens (Local)</div>} />
             
-            <Route path="/login" element={<div>Login / Cadastro</div>} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </div>
