@@ -23,14 +23,14 @@ const CharacterDetails = () => {
   useEffect(() => {
     apiExternal.get(`/character/${id}`)
       .then(res => setCharacter(res.data))
-      .catch(err => console.error(err))
+      .catch(() => console.error("Erro ao buscar detalhes"))
       .finally(() => setLoading(false));
   }, [id]);
 
-  const handleSave = async () => {
+const handleSave = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Precisas de estar logado para salvar um personagem!');
+      alert('Você precisa estar logado para salvar um personagem!');
       navigate('/login');
       return;
     }
@@ -45,13 +45,13 @@ const CharacterDetails = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Personagem salvo com sucesso!');
-    } catch (error) {
+    } catch {
       alert('Erro ao salvar personagem.');
     }
   };
 
-  if (loading) return <p>Carregando detalhes...</p>;
-  if (!character) return <p>Personagem não encontrado.</p>;
+  if (loading) return <p className="p-6">Carregando detalhes...</p>;
+  if (!character) return <p className="p-6">Personagem não encontrado.</p>;
 
   return (
     <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-10">
@@ -61,7 +61,7 @@ const CharacterDetails = () => {
         <div className="grid grid-cols-2 gap-4 text-gray-700">
           <p><strong>Status:</strong> {character.status}</p>
           <p><strong>Espécie:</strong> {character.species}</p>
-          <p><strong>Género:</strong> {character.gender}</p>
+          <p><strong>Gênero:</strong> {character.gender}</p>
           <p><strong>Origem:</strong> {character.origin.name}</p>
         </div>
         <button 
