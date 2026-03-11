@@ -27,7 +27,7 @@ const CharacterDetails = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-const handleSave = async () => {
+  const handleSave = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
       alert('Você precisa estar logado para salvar um personagem!');
@@ -37,16 +37,20 @@ const handleSave = async () => {
 
     try {
       await apiLocal.post('/characters', {
+        original_character_id: character?.id,
         name: character?.name,
         species: character?.species,
+        gender: character?.gender,
+        status: character?.status,
         image: character?.image,
-        status: character?.status
+        origin: character?.origin.name,
+        location: character?.location.name,
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Personagem salvo com sucesso!');
     } catch {
-      alert('Erro ao salvar personagem.');
+      alert('Erro ao salvar personagem. Verifique se todos os campos estão preenchidos.');
     }
   };
 
@@ -64,7 +68,7 @@ const handleSave = async () => {
           <p><strong>Gênero:</strong> {character.gender}</p>
           <p><strong>Origem:</strong> {character.origin.name}</p>
         </div>
-        <button 
+        <button
           onClick={handleSave}
           className="mt-8 w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition"
         >
