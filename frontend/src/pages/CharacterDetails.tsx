@@ -29,6 +29,7 @@ const CharacterDetails = () => {
 
   const handleSave = async () => {
     const token = localStorage.getItem('token');
+
     if (!token) {
       alert('Você precisa estar logado para salvar um personagem!');
       navigate('/login');
@@ -48,9 +49,12 @@ const CharacterDetails = () => {
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
+
       alert('Personagem salvo com sucesso!');
-    } catch {
-      alert('Erro ao salvar personagem. Verifique se todos os campos estão preenchidos.');
+    } catch (error) {
+      console.error("Erro ao salvar:", error);
+      alert('Sessão inválida ou erro interno. Por favor, faça login novamente.');
+      navigate('/login');
     }
   };
 
