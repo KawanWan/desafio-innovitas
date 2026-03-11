@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; // Adicionado o Link
 import { apiExternal } from '../services/api';
 
 interface Character {
@@ -20,8 +21,8 @@ const Characters = () => {
       try {
         const response = await apiExternal.get(`/character?page=${page}`);
         setCharacters(response.data.results);
-      } catch (error) {
-        console.error("Error fetching characters:", error);
+      } catch {
+        console.error("Error fetching characters");
       } finally {
         setLoading(false);
       }
@@ -32,7 +33,7 @@ const Characters = () => {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Personagens</h1>
-      
+
       {loading ? (
         <p>Carregando...</p>
       ) : (
@@ -44,16 +45,20 @@ const Characters = () => {
                 <div className="p-4">
                   <h2 className="font-bold text-xl">{char.name}</h2>
                   <p className="text-gray-600">{char.species} - {char.status}</p>
-                  <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors">
+
+                  <Link
+                    to={`/characters/${char.id}`}
+                    className="mt-4 block text-center w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors"
+                  >
                     Ver Detalhes
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
-          
+
           <div className="flex justify-center mt-8 space-x-4">
-            <button 
+            <button
               onClick={() => setPage(prev => Math.max(prev - 1, 1))}
               disabled={page === 1}
               className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
@@ -61,7 +66,7 @@ const Characters = () => {
               Anterior
             </button>
             <span className="self-center font-bold">Página {page}</span>
-            <button 
+            <button
               onClick={() => setPage(prev => prev + 1)}
               className="px-4 py-2 bg-gray-300 rounded"
             >
