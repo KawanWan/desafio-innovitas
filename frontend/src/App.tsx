@@ -5,6 +5,7 @@ import CharacterDetails from './pages/CharacterDetails';
 import './App.css';
 import Login from './pages/Login';
 import MyCharacters from './pages/MyCharacters';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Navbar />
         <main className="container mx-auto p-4">
           <Routes>
-            <Route path="/" element={<div>Home (Dashboard)</div>} />
+            <Route path="/" element={<Home />} />
 
             <Route path="/characters" element={<Characters />} />
 
