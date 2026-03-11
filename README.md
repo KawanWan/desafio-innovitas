@@ -28,15 +28,19 @@ cd backend
 npm install
 # O banco SQLite será criado automaticamente na raiz do backend
 npm run start:dev
+```
+
 O servidor backend estará rodando em http://localhost:3000.
 
 ### 2. Configurar o Frontend
 Em um novo terminal:
 
-PowerShell
+```powershell
 cd frontend
 npm install
 npm run dev
+```
+
 A aplicação estará disponível em http://localhost:5173.
 
 📌 Funcionalidades Implementadas
