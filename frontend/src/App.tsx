@@ -10,9 +10,9 @@ import Home from './pages/Home';
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-[#0f1114]">
         <Navbar />
-        <main className="container mx-auto p-4">
+        <main className="w-full">
           <Routes>
             <Route path="/" element={<Home />} />
 
