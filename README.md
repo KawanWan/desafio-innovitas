@@ -26,19 +26,25 @@ Bcrypt: Criptografia de senhas para segurança de dados.
 
 ### 1. Configurar o Backend
 
-  Bash
+```powershell
+
   cd backend
   npm install
   npm run start:dev
-  O servidor backend estará rodando em http://localhost:3000.
+
+```
+O servidor backend estará rodando em http://localhost:3000.
 
 ### 2. Configurar o Frontend
 
-  Bash
+```powershell
+
   cd frontend
   npm install
   npm run dev
-  A aplicação estará disponível em http://localhost:5173.
+
+```
+A aplicação estará disponível em http://localhost:5173.
 
 ### 📌 Funcionalidades Implementadas (CRUD Completo)
 
