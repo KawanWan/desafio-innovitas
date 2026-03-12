@@ -1,107 +1,125 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { apiExternal } from '../services/api';
+import { Link } from 'react-router-dom';
 
 interface Character {
   id: number;
   name: string;
-  species: string;
   image: string;
   status: string;
+  species: string;
 }
 
 const Characters = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState(''); // Estado para o filtro de nome
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchCharacters = async () => {
       setLoading(true);
       try {
-        // A API oficial aceita o parâmetro &name= para busca
-        const response = await apiExternal.get(`/character?page=${page}&name=${search}`);
+        const response = await apiExternal.get(`/character/?page=${page}&name=${search}`);
         setCharacters(response.data.results);
-      } catch {
-        setCharacters([]); // Limpa a lista caso não encontre nada na busca
-        console.error("Erro ao buscar personagens ou nenhum resultado encontrado");
+        setTotalPages(response.data.info.pages);
+      } catch (error) {
+        console.error("Erro ao buscar variantes", error);
+        setCharacters([]);
       } finally {
         setLoading(false);
       }
     };
     fetchCharacters();
-  }, [page, search]); // Recarrega quando a página ou a busca mudar
+  }, [page, search]);
 
   return (
-    <div className="p-6">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <h1 className="text-3xl font-bold">Personagens</h1>
-
-        {/* Campo de Filtro */}
-        <input
-          type="text"
-          placeholder="Filtrar por nome..."
-          className="p-2 border border-gray-300 rounded-md w-full md:w-64 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1); // Reseta para a primeira página ao buscar
-          }}
+    <div className="relative min-h-screen bg-[#0f1114] text-white pt-24 pb-20 px-6 md:px-20">
+      <div className="fixed inset-0 z-0">
+        <img
+          src="/rick-and-morty-wallpaper.jpg"
+          className="w-full h-full object-cover opacity-10 grayscale"
+          alt="Background"
         />
+        <div className="absolute inset-0 bg-[#0f1114]/80" />
       </div>
 
-      {loading ? (
-        <p className="text-center py-10">Carregando...</p>
-      ) : (
-        <>
-          {characters.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 border-b border-white/10 pb-10">
+          <div>
+            <span className="text-orange-500 text-[10px] tracking-[0.5em] uppercase font-bold mb-2 block">Scanner de Variantes</span>
+            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">Multiverso</h1>
+          </div>
+
+          <div className="relative w-full md:w-96 group">
+            <input
+              type="text"
+              placeholder="FILTRAR POR NOME..."
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              className="w-full bg-white/5 border border-white/10 px-6 py-4 text-[10px] font-bold tracking-[0.3em] uppercase focus:outline-none focus:border-orange-500/50 transition-all placeholder:text-white/20"
+            />
+            <div className="absolute bottom-0 left-0 h-[1px] bg-orange-500 w-0 group-focus-within:w-full transition-all duration-500" />
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="h-96 flex items-center justify-center">
+            <p className="text-[10px] tracking-[0.5em] uppercase animate-pulse">Sincronizando Frequências...</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {characters.map((char) => (
-                <div key={char.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
-                  <img src={char.image} alt={char.name} className="w-full h-48 object-cover" />
-                  <div className="p-4">
-                    <h2 className="font-bold text-xl truncate">{char.name}</h2>
-                    <p className="text-gray-600">{char.species} - {char.status}</p>
-                    <Link
-                      to={`/characters/${char.id}`}
-                      className="mt-4 block text-center w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors font-medium"
-                    >
-                      Ver Detalhes
-                    </Link>
-                  </div>
-                </div>
+                <CharacterCard key={char.id} char={char} />
               ))}
             </div>
-          ) : (
-            <div className="text-center py-10 text-gray-500 italic">
-              Nenhum personagem encontrado com o nome "{search}".
-            </div>
-          )}
 
-          {/* Paginação */}
-          {characters.length > 0 && (
-            <div className="flex justify-center mt-8 space-x-4">
+            <div className="mt-20 flex justify-center items-center gap-8">
               <button
-                onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="px-4 py-2 bg-gray-200 rounded-md disabled:opacity-50 hover:bg-gray-300 transition"
+                className="text-[10px] font-bold uppercase tracking-[0.3em] disabled:opacity-20 hover:text-orange-500 transition-colors"
               >
-                Anterior
+                [ Anterior ]
               </button>
-              <span className="self-center font-bold text-gray-700">Página {page}</span>
+              <span className="text-orange-500 font-mono text-sm">
+                {page.toString().padStart(2, '0')} / {totalPages.toString().padStart(2, '0')}
+              </span>
               <button
-                onClick={() => setPage(prev => prev + 1)}
-                className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 transition"
+                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="text-[10px] font-bold uppercase tracking-[0.3em] disabled:opacity-20 hover:text-orange-500 transition-colors"
               >
-                Próxima
+                [ Próximo ]
               </button>
             </div>
-          )}
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
+
+const CharacterCard = ({ char }: { char: Character }) => (
+  <Link
+    to={`/characters/${char.id}`}
+    className="group relative bg-white/5 border border-white/10 overflow-hidden hover:border-orange-500/50 transition-all duration-500"
+  >
+    <div className="aspect-square overflow-hidden">
+      <img
+        src={char.image}
+        alt={char.name}
+        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 opacity-60 group-hover:opacity-100"
+      />
+    </div>
+    <div className="p-6">
+      <p className="text-orange-500 text-[9px] font-bold uppercase tracking-[0.2em] mb-1">{char.species} - {char.status}</p>
+      <h3 className="text-lg font-black uppercase tracking-tight group-hover:text-orange-100 transition-colors">{char.name}</h3>
+    </div>
+    <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-white/0 group-hover:border-orange-500/50 transition-all" />
+  </Link>
+);
 
 export default Characters;

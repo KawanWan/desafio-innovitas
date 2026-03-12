@@ -54,9 +54,9 @@ const Navbar = () => {
           className={`absolute top-full right-0 mt-0 w-64 bg-[#14161a] border-l border-b border-white/10 p-6 flex flex-col items-start space-y-6 shadow-2xl transition-all duration-300 md:hidden z-110 
           ${isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'}`}
         >
-          <NavItem to="/" label="Dashboard" active={isActive('/')} onClick={closeMenu} />
-          <NavItem to="/characters" label="Multiverse" active={isActive('/characters')} onClick={closeMenu} />
-          {isLoggedIn && <NavItem to="/my-characters" label="Collection" active={isActive('/my-characters')} onClick={closeMenu} />}
+          <NavItem to="/" label="Home" active={isActive('/')} onClick={closeMenu} />
+          <NavItem to="/characters" label="Multiverso" active={isActive('/characters')} onClick={closeMenu} />
+          {isLoggedIn && <NavItem to="/my-characters" label="Minha Coleção" active={isActive('/my-characters')} onClick={closeMenu} />}
           <div className="pt-4 border-t border-white/5 w-full">
             <AuthButton isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           </div>
