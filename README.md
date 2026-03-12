@@ -24,7 +24,7 @@ Bcrypt: Criptografia de senhas para segurança de dados.
 
 ### 🚀 Como Rodar o Projeto
 
-# 1. Configurar o Backend
+### 1. Configurar o Backend
 
   Bash
   cd backend
