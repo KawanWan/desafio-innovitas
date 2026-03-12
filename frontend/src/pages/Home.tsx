@@ -124,7 +124,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {favorites.map((char) => (
                 <Link
-                  to="/my-characters"
+                  to={`/my-characters/${char.id}`}
                   key={char.id}
                   className="group relative aspect-[3/4] bg-white/5 border border-white/10 rounded-sm overflow-hidden"
                 >
@@ -135,7 +135,9 @@ const Home = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                   <div className="absolute bottom-8 left-8">
-                    <p className="text-orange-500 text-[9px] font-bold uppercase tracking-[0.3em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">Target Verified</p>
+                    <p className="text-orange-500 text-[9px] font-bold uppercase tracking-[0.3em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">
+                      Registro Interno
+                    </p>
                     <h3 className="text-2xl font-black uppercase tracking-tight text-white">{char.name}</h3>
                   </div>
                 </Link>
