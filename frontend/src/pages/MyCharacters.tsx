@@ -89,7 +89,7 @@ const MyCharacters = () => {
             {characters.map((char) => (
               <div
                 key={char.id}
-                onClick={() => navigate(`/character/${char.original_character_id}`)}
+                onClick={() => navigate(`/my-characters/${char.id}`)}
                 className="group relative bg-black/40 border border-white/10 p-3 hover:border-orange-500/50 transition-all duration-500 cursor-pointer"
               >
                 <div className="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />

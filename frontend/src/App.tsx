@@ -6,6 +6,7 @@ import './App.css';
 import Login from './pages/Login';
 import MyCharacters from './pages/MyCharacters';
 import Home from './pages/Home';
+import LocalCharacterDetails from './components/LocalCharacterDetails';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route path="/characters" element={<Characters />} />
 
             <Route path="/characters/:id" element={<CharacterDetails />} />
+
+            <Route path="/my-characters/:id" element={<LocalCharacterDetails />} />
 
             <Route path="/my-characters" element={<MyCharacters />} />
 
