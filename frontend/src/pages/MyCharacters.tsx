@@ -98,7 +98,7 @@ const MyCharacters = () => {
                   <img
                     src={char.image}
                     alt={char.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 brightness-110"
                   />
                   <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/90 to-transparent z-20">
                     <span className="text-[8px] text-orange-500 font-bold tracking-widest uppercase mb-1 block">

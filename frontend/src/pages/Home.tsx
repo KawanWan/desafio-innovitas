@@ -128,7 +128,11 @@ const Home = () => {
                   key={char.id}
                   className="group relative aspect-[3/4] bg-white/5 border border-white/10 rounded-sm overflow-hidden"
                 >
-                  <img src={char.image} className="w-full h-full object-cover opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" alt={char.name} />
+                  <img
+                    src={char.image}
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 brightness-110"
+                    alt={char.name}
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                   <div className="absolute bottom-8 left-8">
                     <p className="text-orange-500 text-[9px] font-bold uppercase tracking-[0.3em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">Target Verified</p>

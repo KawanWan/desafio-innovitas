@@ -111,7 +111,7 @@ const CharacterCard = ({ char }: { char: Character }) => (
       <img
         src={char.image}
         alt={char.name}
-        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 opacity-60 group-hover:opacity-100"
+        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 brightness-105"
       />
     </div>
     <div className="p-6">
