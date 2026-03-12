@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+🛸 C-137 Intelligence System | Rick and Morty CRUD
+Este projeto é uma aplicação de inteligência interdimensional que permite explorar personagens do multiverso de Rick and Morty e gerenciar uma base de dados local de custódia. Desenvolvido como parte do desafio técnico para a Innovitas.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Funcionalidades Principais
+Dashboard Cinematográfico: Estatísticas em tempo real da API externa e da base de dados local.
 
-Currently, two official plugins are available:
+Scanner de Variantes: Listagem de personagens com paginação e busca por nome.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Dossiê de Campo: Visualização detalhada de dados da API externa.
 
-## React Compiler
+Unidade de Custódia (CRUD Completo):
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Create: Salva personagens na base local.
 
-## Expanding the ESLint configuration
+Read: Lista coleções personalizadas do usuário logado.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Update: Permite editar informações (Nome, Status, Notas de Campo) dos registros locais.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Delete: Remove registros da base de dados local.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Autenticação JWT: Sistema de Login e Registro com proteção de rotas no Frontend e Backend.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Design HUD Futurista: Interface inspirada em interfaces de naves espaciais (Heads-Up Display) com Glassmorphism.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🛠️ Tecnologias Utilizadas
+Frontend
+React + TypeScript (Vite)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Tailwind CSS (Estilização)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+React Router Dom (Navegação)
+
+Axios (Integração com APIs)
+
+Lucide React (Iconografia)
+
+Backend
+NestJS (Framework Node.js)
+
+TypeORM (Persistência de dados)
+
+SQLite (Banco de dados local)
+
+Passport + JWT (Segurança)
+
+📦 Como Rodar o Projeto
+1. Clonar o Repositório
+Bash
+git clone https://github.com/seu-usuario/desafio-innovitas.git
+cd desafio-innovitas
+2. Configurar o Backend
+Bash
+cd backend
+npm install
+npm run start:dev
+O servidor iniciará em http://localhost:3000
+
+3. Configurar o Frontend
+Bash
+cd ../frontend
+npm install
+npm run dev
+Acesse o link gerado pelo Vite (geralmente http://localhost:5173)
+
+🛡️ Decisões de Arquitetura
+Separação de Contextos: Dados da API pública de Rick and Morty são tratados como consulta (read-only), enquanto os dados locais permitem o ciclo completo de edição (CRUD).
+
+Clean Code & ESLint: O projeto segue regras rígidas de linting para garantir um código limpo e livre de variáveis não utilizadas ou erros de tipagem.
+
+Experiência do Usuário (UX): Uso de estados de carregamento (Skeleton/Pulse), transições suaves e feedback imediato em ações de salvamento e exclusão.
+
+Desenvolvido por Kawan - 2026.
